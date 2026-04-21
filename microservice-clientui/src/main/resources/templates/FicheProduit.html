@@ -1,0 +1,52 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Mcommerce Client</a>
+        </div>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img th:src="${produit.image}" class="card-img-top" alt="Produit image" style="height:320px; object-fit:cover;" />
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${produit.titre}">Titre du produit</h2>
+                    <p class="text-muted mb-1">ID produit : <span th:text="${produit.id}">0</span></p>
+                    <p class="fw-bold">Prix unitaire : <span th:text="${produit.prix} + ' €'"></span></p>
+                    <p class="card-text" th:text="${produit.description}">Description complète du produit</p>
+
+                    <form method="post" action="/commander-produit">
+                        <input type="hidden" name="idProduit" th:value="${produit.id}" />
+                        <input type="hidden" name="montant" th:value="${produit.prix}" />
+                        <div class="mb-3">
+                            <label for="quantite" class="form-label">Quantité</label>
+                            <input id="quantite" name="quantite" type="number" min="1" value="1" class="form-control" onchange="updateTotal()" />
+                        </div>
+                        <div class="mb-3">
+                            <p class="mb-0">Total estimé : <strong id="totalPrice" th:text="${produit.prix} + ' €'"></strong></p>
+                        </div>
+                        <button type="submit" class="btn btn-success">Commander ce produit</button>
+                        <a href="/" class="btn btn-outline-secondary ms-2">Retour à l'accueil</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function updateTotal() {
+        const quantity = document.getElementById('quantite').valueAsNumber || 1;
+        const price = parseFloat(document.querySelector('input[name="montant"]').value);
+        document.getElementById('totalPrice').textContent = (price * quantity).toFixed(2) + ' €';
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

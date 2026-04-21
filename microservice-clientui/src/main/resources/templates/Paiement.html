@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce - Paiement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Mcommerce Client</a>
+        </div>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Paiement de la commande</h2>
+                    <p class="text-muted">Commande n° <span th:text="${commande.id}">0</span></p>
+                    <p class="fw-bold">Montant à payer : <span th:text="${montant} + ' €'"></span></p>
+                    <p>Veuillez saisir un numéro de carte pour simuler le paiement.</p>
+
+                    <form method="post" action="/payer-commande">
+                        <input type="hidden" name="idCommande" th:value="${commande.id}" />
+                        <input type="hidden" name="montantCommande" th:value="${montant}" />
+                        <div class="mb-3">
+                            <label for="numeroCarte" class="form-label">Numéro de carte</label>
+                            <input id="numeroCarte" name="numeroCarte" type="text" pattern="\d{16}" maxlength="16" class="form-control" placeholder="1234567812345678" />
+                            <div class="form-text">Entrez 16 chiffres ou laissez vide pour générer un numéro automatiquement.</div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Payer la commande</button>
+                        <a href="/" class="btn btn-outline-secondary ms-2">Retour à l'accueil</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce — Connexion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card { border: none; border-radius: 20px; }
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); border: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-lg p-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">🛒 Mcommerce</h2>
+                    <p class="text-muted">Connectez-vous à votre compte</p>
+                </div>
+
+                <!-- Message d'erreur -->
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                <!-- Message de succès après inscription -->
+                <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+                <form method="post" action="/login">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Username</label>
+                        <input type="text" name="username" class="form-control form-control-lg"
+                               placeholder="Votre username" required autofocus />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Mot de passe</label>
+                        <input type="password" name="password" class="form-control form-control-lg"
+                               placeholder="Votre mot de passe" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 btn-lg rounded-pill">
+                        Se connecter
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p class="text-muted mb-0">Pas encore de compte ?
+                        <a href="/register" class="text-decoration-none fw-semibold">S'inscrire</a>
+                    </p>
+                    <a href="/" class="text-muted small">Continuer sans connexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,6 +1,11 @@
-version : "3.7"
+version: "3.7"
 
 services:
+
+  # ─────────────────────────────────────────
+  # BASE DE DONNÉES POSTGRESQL
+  # Un seul container PostgreSQL, plusieurs bases dedans
+  # ─────────────────────────────────────────
   postgres:
     image: postgres:13
     container_name: postgres-db
@@ -9,4 +14,51 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      # Script SQL exécuté automatiquement au premier démarrage
       - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  # ─────────────────────────────────────────
+  # CONFIG SERVER — doit démarrer EN PREMIER
+  # ─────────────────────────────────────────
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "9200:9200"
+    depends_on:
+      - postgres
+
+  # ─────────────────────────────────────────
+  # EUREKA — démarre après config-server
+  # ─────────────────────────────────────────
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "9201:9201"
+    depends_on:
+      - config-server
+
+  # ─────────────────────────────────────────
+  # MICROSERVICE AUTH (nouveau)
+  # ─────────────────────────────────────────
+  microservice-auth:
+    build: ./microservice-auth
+    container_name: microservice-auth
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka-server
+      - postgres
+
+  # ─────────────────────────────────────────
+  # GATEWAY
+  # ─────────────────────────────────────────
+  gateway-server:
+    build: ./gateway-server
+    container_name: gateway-server
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+      - microservice-auth

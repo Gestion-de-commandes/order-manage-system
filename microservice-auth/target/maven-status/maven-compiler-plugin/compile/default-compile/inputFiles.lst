@@ -1,0 +1,13 @@
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/dto/RegisterRequest.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/dto/JwtResponse.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/security/JwtUtils.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/model/User.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/repository/RoleRepository.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/security/SecurityConfig.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/model/Role.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/dto/LoginRequest.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/dto/RefreshTokenRequest.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/security/UserDetailsServiceImpl.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/controller/AuthController.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/MicroserviceAuthApplication.java
+/home/hope/Documents/campus/2emeSemestre/intergiciel/projet_final/order-manage-system/microservice-auth/src/main/java/com/mauth/repository/UserRepository.java

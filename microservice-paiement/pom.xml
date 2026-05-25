@@ -69,6 +69,14 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
+		<!-- RabbitMQ — permet à Spring de publier des messages -->
+		<!-- AMQP = Advanced Message Queuing Protocol -->
+		<!-- C'est le protocole que RabbitMQ utilise -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
 		<!--sleuth- for log-->
 		<!--
 		<dependency>
@@ -84,11 +92,46 @@
 		</dependency>
 		-->
 
+
+		<!-- SOAP - Spring Web Services -->
+<!-- C'est la bibliothèque principale qui permet de créer un service SOAP -->
+<!-- Sans ça, Spring Boot ne sait pas gérer les requêtes SOAP -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web-services</artifactId>
+</dependency>
+
+<!-- WSDL4J -->
+<!-- Permet à Spring de générer et exposer automatiquement le fichier WSDL -->
+<!-- Le WSDL c'est le "contrat" du service SOAP - indispensable -->
+<dependency>
+    <groupId>wsdl4j</groupId>
+    <artifactId>wsdl4j</artifactId>
+</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		<!-- WSS4J = bibliothèque qui gère WS-Security -->
+<!-- Elle intercepte les requêtes SOAP et vérifie les credentials -->
+<dependency>
+    <groupId>org.springframework.ws</groupId>
+    <artifactId>spring-ws-security</artifactId>
+</dependency>
+
+<!-- Apache WSS4J — moteur de sécurité SOAP -->
+<dependency>
+    <groupId>org.apache.wss4j</groupId>
+    <artifactId>wss4j-ws-security-dom</artifactId>
+    <version>2.4.1</version>
+</dependency>
+
+
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -109,6 +152,35 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+
+			<!-- Plugin JAXB -->
+<!-- XSD = fichier qui décrit la structure des données SOAP -->
+<!-- Ce plugin lit le XSD et génère automatiquement les classes Java correspondantes -->
+<!-- Sans ça, tu devrais écrire ces classes à la main -->
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>jaxb2-maven-plugin</artifactId>
+    <version>2.5.0</version>
+    <executions>
+        <execution>
+            <id>xjc</id>
+            <goals>
+                <goal>xjc</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <!-- Dossier où tu vas mettre ton fichier XSD -->
+        <sources>
+            <source>${project.basedir}/src/main/resources/xsd</source>
+        </sources>
+        <!-- Package Java où les classes générées seront placées -->
+        <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+        <clearOutputDir>false</clearOutputDir>
+    </configuration>
+</plugin>
+
 		</plugins>
 	</build>
 

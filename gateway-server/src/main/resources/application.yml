@@ -11,28 +11,34 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true 
+          lower-case-service-id: true
       routes:
+        - id: microservice-auth
+          uri: http://localhost:8085
+          predicates:
+            - Path=/auth/**
+
         - id: microservice-produits
-          uri: lb://MICROSERVICE-PRODUITS
+          uri: lb://microservice-produits
           predicates:
             - Path=/microservice-produits/**
           filters:
-            - RewritePath=/microservice-produits/(?<remaining>.*), /\${remaining}
+            - RewritePath=/microservice-produits/(?<remaining>.*), /${remaining}
 
         - id: microservice-commandes
-          uri: lb://MICROSERVICE-COMMANDES
+          uri: lb://microservice-commandes
           predicates:
             - Path=/microservice-commandes/**
           filters:
-            - RewritePath=/microservice-commandes/(?<remaining>.*), /\${remaining}
+            - RewritePath=/microservice-commandes/(?<remaining>.*), /${remaining}
 
         - id: microservice-paiement
-          uri: lb://MICROSERVICE-PAIEMENT
+          uri: lb://microservice-paiement
           predicates:
             - Path=/microservice-paiement/**
           filters:
-            - RewritePath=/microservice-paiement/(?<remaining>.*), /\${remaining}
+            - RewritePath=/microservice-paiement/(?<remaining>.*), /${remaining}
+
 
 eureka:
   client:

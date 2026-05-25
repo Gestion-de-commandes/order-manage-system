@@ -1,11 +1,11 @@
-# Use an official OpenJDK runtime as a parent image
 FROM openjdk:11-jre-slim
 
-# Set the working directory to /app
 WORKDIR /app
 
-# Copy the compiled Spring Boot JAR file to the container
-COPY target/my-spring-boot-app.jar /app/my-spring-boot-app.jar
+# Correction : le vrai nom du JAR généré par Maven
+# Format : artifactId-version.jar
+# artifactId = "config-server" (dans pom.xml)
+# version = "0.0.1-SNAPSHOT" (dans pom.xml)
+COPY target/config-server-0.0.1-SNAPSHOT.jar /app/config-server.jar
 
-# Specify the command to run your Spring Boot app
-CMD ["java", "-jar", "/app/my-spring-boot-app.jar"]
+CMD ["java", "-jar", "/app/config-server.jar"]
